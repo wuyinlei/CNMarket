@@ -1,8 +1,16 @@
 <resources>
-    <string name="app_name">CNMarket</string>
+    <string name="app_name">手机助手</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="recomment_title">推荐</string>
+    <string name="ranklist_title">排行</string>
+    <string name="game_title">游戏</string>
+    <string name="category_title">分类</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

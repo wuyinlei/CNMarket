@@ -1,25 +1,74 @@
-package ruolan.com.cnmarket;
+package ruolan.com.cnmarket.ui;
 
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+import java.util.ArrayList;
+import java.util.List;
+
+import ruolan.com.cnmarket.R;
+import ruolan.com.cnmarket.ViewPagerAdapter;
+import ruolan.com.cnmarket.base.BaseActivity;
+
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+
+
+    private List<String> mTitles = new ArrayList<>();
+    private List<Fragment> mFragments = new ArrayList<>();
+    private ViewPagerAdapter mViewPagerAdapter;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initData() {
+        initTitles();
+        initFragments();
+        initTabs();
+    }
+
+    private void initTabs() {
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),mFragments,mTitles);
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
+
+    private void initFragments() {
+        for (int i = 0; i < mTitles.size(); i++) {
+            mFragments.add(ContentFragment.newInstance(mTitles.get(i)));
+        }
+    }
+
+    private void initTitles() {
+        mTitles.add(getResources().getString(R.string.recomment_title));
+        mTitles.add(getResources().getString(R.string.ranklist_title));
+        mTitles.add(getResources().getString(R.string.game_title));
+        mTitles.add(getResources().getString(R.string.category_title));
+    }
+
+
+
+    @Override
+    protected void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +89,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
+
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
