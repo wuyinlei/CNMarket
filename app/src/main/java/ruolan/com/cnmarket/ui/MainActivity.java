@@ -46,16 +46,17 @@ public class MainActivity extends BaseActivity
     }
 
     private void initTabs() {
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),mFragments,mTitles);
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mFragments, mTitles);
         mViewPager.setAdapter(mViewPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }
 
     private void initFragments() {
-        for (int i = 0; i < mTitles.size(); i++) {
-            mFragments.add(ContentFragment.newInstance(mTitles.get(i)));
-        }
+        mFragments.add(RecommendFragment.newInstance(mTitles.get(0)));
+        mFragments.add(RankingFragment.newInstance(mTitles.get(1)));
+        mFragments.add(GameFragment.newInstance(mTitles.get(2)));
+        mFragments.add(CategoryFragment.newInstance(mTitles.get(3)));
     }
 
     private void initTitles() {
@@ -64,7 +65,6 @@ public class MainActivity extends BaseActivity
         mTitles.add(getResources().getString(R.string.game_title));
         mTitles.add(getResources().getString(R.string.category_title));
     }
-
 
 
     @Override
