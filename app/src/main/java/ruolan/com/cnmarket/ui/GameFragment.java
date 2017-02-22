@@ -23,16 +23,21 @@ public class GameFragment extends BaseFragment {
 
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     public int setLayout() {
         return R.layout.fragment_game;
     }
 
     @Override
     public void init() {
-        mTvTitle = (TextView) mRootView.findViewById(R.id.title);
-        mTitle = getArguments().getString(Contants.FRAGMENT_TITLE);
-        if (!TextUtils.isEmpty(mTitle))
-            mTvTitle.setText(mTitle);
+//        mTvTitle = (TextView) mRootView.findViewById(R.id.title);
+//        mTitle = getArguments().getString(Contants.FRAGMENT_TITLE);
+//        if (!TextUtils.isEmpty(mTitle))
+//            mTvTitle.setText(mTitle);
     }
 
 

@@ -23,6 +23,10 @@ public class CategoryFragment extends BaseFragment {
     private TextView mTvTitle;
 
 
+    @Override
+    protected void initData() {
+
+    }
 
     @Override
     public int setLayout() {
@@ -31,10 +35,10 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public void init() {
-        mTvTitle = (TextView) mRootView.findViewById(R.id.title);
-        mTitle = getArguments().getString(Contants.FRAGMENT_TITLE);
-        if (!TextUtils.isEmpty(mTitle))
-            mTvTitle.setText(mTitle);
+//        mTvTitle = (TextView) mRootView.findViewById(R.id.title);
+//        mTitle = getArguments().getString(Contants.FRAGMENT_TITLE);
+//        if (!TextUtils.isEmpty(mTitle))
+//            mTvTitle.setText(mTitle);
     }
 
 
