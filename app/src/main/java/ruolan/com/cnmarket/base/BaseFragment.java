@@ -33,7 +33,7 @@ public abstract class BaseFragment extends Fragment {
 
         mRootView = inflater.inflate(setLayout(), container, false);
         mUnbinder=  ButterKnife.bind(this, mRootView);
-
+        init();
         initData();
 
 
@@ -50,7 +50,7 @@ public abstract class BaseFragment extends Fragment {
         this.mApplication = (CNMarketApplicaption) getActivity().getApplication();
        // setupAcitivtyComponent(mApplication.getAppComponent());
 
-        init();
+
 
     }
     
