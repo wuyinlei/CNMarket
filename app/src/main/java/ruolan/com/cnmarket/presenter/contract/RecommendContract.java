@@ -10,7 +10,7 @@ import ruolan.com.cnmarket.ui.BaseView;
  * Created by wuyinlei on 2017/2/22.
  */
 
-public interface RecommentContract {
+public interface RecommendContract {
 
     interface  View extends BaseView{
         void showResult(List<AppInfo> appInfos);

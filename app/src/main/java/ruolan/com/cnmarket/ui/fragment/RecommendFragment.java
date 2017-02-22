@@ -1,7 +1,8 @@
-package ruolan.com.cnmarket.ui;
+package ruolan.com.cnmarket.ui.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,21 +14,24 @@ import android.widget.Toast;
 import java.util.List;
 
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ruolan.com.cnmarket.Contants;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.base.BaseFragment;
 import ruolan.com.cnmarket.been.AppInfo;
-import ruolan.com.cnmarket.presenter.RecommentPresenter;
-import ruolan.com.cnmarket.presenter.contract.RecommentContract;
-import ruolan.com.cnmarket.ui.adapter.RecommentAppAdapter;
+import ruolan.com.cnmarket.di.DaggerRecommendComponent;
+import ruolan.com.cnmarket.di.RecommendModule;
+import ruolan.com.cnmarket.presenter.contract.RecommendContract;
+import ruolan.com.cnmarket.ui.adapter.RecommendAppAdapter;
 
 /**
  * Created by wuyinlei on 2017/1/19.
  */
 
-public class RecommendFragment extends BaseFragment implements RecommentContract.View {
+public class RecommendFragment extends BaseFragment implements RecommendContract.View {
 
     private String mTitle;
     private TextView mTvTitle;
@@ -36,12 +40,14 @@ public class RecommendFragment extends BaseFragment implements RecommentContract
     public RecyclerView mRecyclerView;
 
     private List<AppInfo> mAppInfos;
-    private RecommentAppAdapter mAppAdapter;
+    private RecommendAppAdapter mAppAdapter;
 
 
-    private RecommentContract.Presenter mPresenter;
+    @Inject
+    RecommendContract.Presenter mPresenter;
 
-    private ProgressDialog mProgressDialog;
+    @Inject
+    ProgressDialog mProgressDialog;
 
 
     @Override
@@ -78,8 +84,10 @@ public class RecommendFragment extends BaseFragment implements RecommentContract
     @Override
     public void init() {
         ButterKnife.bind(this, mRootView);
-        mPresenter = new RecommentPresenter(this);
-        mProgressDialog = new ProgressDialog(getActivity());
+        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this))
+                .build().inject(this);
+//        mPresenter = new RecommendPresenter(this);
+//        mProgressDialog = new ProgressDialog(getActivity());
 //        mTvTitle = (TextView) mRootView.findViewById(R.id.title);
 //        mTitle = getArguments().getString(Contants.FRAGMENT_TITLE);
 //        if (!TextUtils.isEmpty(mTitle))
@@ -89,12 +97,20 @@ public class RecommendFragment extends BaseFragment implements RecommentContract
         // Toast.makeText(getActivity(), "mRecyclerView:" + mRecyclerView, Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        //  DaggerRecommendComponent.create();
+    }
+
     private void initRecyclerView(List<AppInfo> appInfos) {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        mRecyclerView.addItemDecoration();
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAppAdapter = new RecommentAppAdapter(getActivity(), appInfos);
+        mAppAdapter = new RecommendAppAdapter(getActivity(), appInfos);
         mRecyclerView.setAdapter(mAppAdapter);
 
     }

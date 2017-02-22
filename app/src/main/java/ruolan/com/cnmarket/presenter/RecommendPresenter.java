@@ -5,23 +5,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ruolan.com.cnmarket.been.AppInfo;
 import ruolan.com.cnmarket.been.PageBean;
-import ruolan.com.cnmarket.data.RecommentModel;
-import ruolan.com.cnmarket.presenter.contract.RecommentContract;
+import ruolan.com.cnmarket.data.RecommendModel;
+import ruolan.com.cnmarket.presenter.contract.RecommendContract;
 
 /**
  * Created by wuyinlei on 2017/2/22.
  */
 
-public class RecommentPresenter implements RecommentContract.Presenter {
+public class RecommendPresenter implements RecommendContract.Presenter {
 
-    private RecommentContract.View mView;
+    private RecommendContract.View mView;
 
-    private RecommentModel mModel;
+    private RecommendModel mModel;
 
-    public RecommentPresenter(RecommentContract.View view) {
+    public RecommendPresenter(RecommendContract.View view, RecommendModel model) {
         this.mView = view;
 
-        mModel = new RecommentModel();
+        mModel = model;
     }
 
     @Override

@@ -1,12 +1,7 @@
-package ruolan.com.cnmarket.ui;
+package ruolan.com.cnmarket.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ruolan.com.cnmarket.Contants;
@@ -17,8 +12,7 @@ import ruolan.com.cnmarket.base.BaseFragment;
  * Created by wuyinlei on 2017/1/19.
  */
 
-public class CategoryFragment extends BaseFragment {
-
+public class GameFragment extends BaseFragment {
     private String mTitle;
     private TextView mTvTitle;
 
@@ -30,7 +24,7 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     public int setLayout() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_game;
     }
 
     @Override

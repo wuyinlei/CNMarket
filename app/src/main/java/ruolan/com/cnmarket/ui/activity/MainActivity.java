@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket.ui;
+package ruolan.com.cnmarket.ui.activity;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +20,10 @@ import java.util.List;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.ViewPagerAdapter;
 import ruolan.com.cnmarket.base.BaseActivity;
+import ruolan.com.cnmarket.ui.fragment.CategoryFragment;
+import ruolan.com.cnmarket.ui.fragment.GameFragment;
+import ruolan.com.cnmarket.ui.fragment.RankingFragment;
+import ruolan.com.cnmarket.ui.fragment.RecommendFragment;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {

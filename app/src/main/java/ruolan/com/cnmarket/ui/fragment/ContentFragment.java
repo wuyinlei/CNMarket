@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket.ui;
+package ruolan.com.cnmarket.ui.fragment;
 
 
 import android.os.Bundle;

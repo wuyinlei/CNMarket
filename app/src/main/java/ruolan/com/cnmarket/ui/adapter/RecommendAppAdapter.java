@@ -1,7 +1,6 @@
 package ruolan.com.cnmarket.ui.adapter;
 
 import android.content.Context;
-import android.net.LinkAddress;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +19,14 @@ import ruolan.com.cnmarket.been.AppInfo;
  * Created by wuyinlei on 2017/2/22.
  */
 
-public class RecommentAppAdapter extends RecyclerView.Adapter<RecommentAppAdapter.ViewHolder> {
+public class RecommendAppAdapter extends RecyclerView.Adapter<RecommendAppAdapter.ViewHolder> {
 
 
     private List<AppInfo> mDatas;
 
     private Context mContext;
 
-    public RecommentAppAdapter(Context context, List<AppInfo> datas) {
+    public RecommendAppAdapter(Context context, List<AppInfo> datas) {
         this.mContext = context;
         mDatas = datas;
     }

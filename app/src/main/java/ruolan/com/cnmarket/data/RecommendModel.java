@@ -14,7 +14,7 @@ import ruolan.com.cnmarket.data.http.HttpManager;
  * Created by wuyinlei on 2017/2/22.
  */
 
-public class RecommentModel {
+public class RecommendModel {
 
 
     public void  getApps(Callback<PageBean<AppInfo>> callback){
