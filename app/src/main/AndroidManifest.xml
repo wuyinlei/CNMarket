@@ -3,6 +3,9 @@
           package="ruolan.com.cnmarket">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".CNMarketApplication"
@@ -12,19 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.GuideActivity"
+            android:name=".ui.activity.WelcomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.Notitle.FullScreen"
-            >
+            android:theme="@style/AppTheme.Notitle.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-            >
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ui.activity.GuideActivity"
+                  android:theme="@style/AppTheme.Notitle.FullScreen">
         </activity>
     </application>
 
