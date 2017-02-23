@@ -7,15 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ruolan.com.cnmarket.CNMarketApplication;
+import ruolan.com.cnmarket.di.component.AppComponent;
+import ruolan.com.cnmarket.presenter.BasePresenter;
 
-/**
- * Created by wuyinlei on 2017/1/9.
- */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
 
     private Unbinder mUnbinder;
@@ -24,15 +25,19 @@ public abstract class BaseFragment extends Fragment {
 
     public View mRootView;
 
+    @Inject
+    public T mPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-
         mRootView = inflater.inflate(setLayout(), container, false);
-        mUnbinder=  ButterKnife.bind(this, mRootView);
+        mUnbinder = ButterKnife.bind(this, mRootView);
+        this.mApplication = (CNMarketApplication) getActivity().getApplication();
+        setupAcitivtyComponent(mApplication.getAppComponent());
+
         init();
         initData();
 
@@ -47,19 +52,25 @@ public abstract class BaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        this.mApplication = (CNMarketApplication) getActivity().getApplication();
-       // setupAcitivtyComponent(mApplication.getAppComponent());
-
 
 
     }
-    
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder != Unbinder.EMPTY) {
+            mUnbinder.unbind();
+        }
+    }
+
+    protected abstract void setupAcitivtyComponent(AppComponent appComponent);
 
 
     public abstract int setLayout();
 
-  //  public abstract  void setupAcitivtyComponent(AppComponent appComponent);
+    //  public abstract  void setupAcitivtyComponent(AppComponent appComponent);
 
 
-    public abstract void  init();
+    public abstract void init();
 }

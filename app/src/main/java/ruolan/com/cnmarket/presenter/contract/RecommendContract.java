@@ -12,7 +12,7 @@ import ruolan.com.cnmarket.ui.BaseView;
 
 public interface RecommendContract {
 
-    interface  View extends BaseView{
+    interface View extends BaseView {
         void showResult(List<AppInfo> appInfos);
 
         void showNoData();
@@ -20,11 +20,10 @@ public interface RecommendContract {
         void showError(String msg);
     }
 
-    interface Presenter extends BasePresenter{
-
-
-
-        void requestDatas();
-
-    }
+//    interface Presenter extends BasePresenter {
+//
+//
+//        void requestDatas();
+//
+//    }
 }

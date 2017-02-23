@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ruolan.com.cnmarket.R;
+import ruolan.com.cnmarket.di.component.AppComponent;
 import ruolan.com.cnmarket.ui.adapter.ViewPagerAdapter;
 import ruolan.com.cnmarket.base.BaseActivity;
 import ruolan.com.cnmarket.ui.fragment.CategoryFragment;
@@ -102,6 +103,11 @@ public class MainActivity extends BaseActivity
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public void setUpActivityComponent(AppComponent appComponent) {
+
     }
 
     @Override

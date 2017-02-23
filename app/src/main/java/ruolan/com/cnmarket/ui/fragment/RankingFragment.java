@@ -7,6 +7,7 @@ import android.widget.TextView;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.base.BaseFragment;
 import ruolan.com.cnmarket.common.Constants;
+import ruolan.com.cnmarket.di.component.AppComponent;
 
 /**
  * Created by wuyinlei on 2017/1/19.
@@ -20,6 +21,11 @@ public class RankingFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void setupAcitivtyComponent(AppComponent appComponent) {
 
     }
 

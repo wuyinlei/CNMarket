@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,21 +19,20 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ruolan.com.cnmarket.CNMarketApplication;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.base.BaseFragment;
 import ruolan.com.cnmarket.been.AppInfo;
 import ruolan.com.cnmarket.common.Constants;
+import ruolan.com.cnmarket.di.component.AppComponent;
 import ruolan.com.cnmarket.di.component.DaggerRecommendComponent;
 import ruolan.com.cnmarket.di.module.RecommendModule;
+import ruolan.com.cnmarket.presenter.RecommendPresenter;
 import ruolan.com.cnmarket.presenter.contract.RecommendContract;
 import ruolan.com.cnmarket.ui.adapter.RecommendAppAdapter;
 
-/**
- * Created by wuyinlei on 2017/1/19.
- */
 
-public class RecommendFragment extends BaseFragment implements RecommendContract.View {
+public class RecommendFragment extends BaseFragment<RecommendPresenter> implements
+        RecommendContract.View {
 
     private String mTitle;
     private TextView mTvTitle;
@@ -44,8 +44,8 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     private RecommendAppAdapter mAppAdapter;
 
 
-    @Inject
-    RecommendContract.Presenter mPresenter;
+   // @Inject
+//    RecommendContract.Presenter mPresenter;
 
     @Inject
     ProgressDialog mProgressDialog;
@@ -53,6 +53,8 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     @Override
     protected void initData() {
+
+        Log.d("RecommendFragment", "mPresenter:" + mPresenter);
 
         mPresenter.requestDatas();
 
@@ -85,11 +87,13 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     @Override
     public void init() {
         ButterKnife.bind(this, mRootView);
-        DaggerRecommendComponent.builder()
-                .appComponent(((CNMarketApplication) getActivity()
-                        .getApplication()).getAppComponent())
-                .recommendModule(new RecommendModule(this))
-                .build().inject(this);
+//        DaggerRecommendComponent.builder()
+//                .appComponent(((CNMarketApplication) getActivity()
+//                        .getApplication()).getAppComponent())
+//                .recommendModule(new RecommendModule(this))
+//                .build().inject(this);
+
+
 //        mPresenter = new RecommendPresenter(this);
 //        mProgressDialog = new ProgressDialog(getActivity());
 //        mTvTitle = (TextView) mRootView.findViewById(R.id.title);
@@ -107,6 +111,13 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
         super.onActivityCreated(savedInstanceState);
 
         //  DaggerRecommendComponent.create();
+    }
+
+    @Override
+    protected void setupAcitivtyComponent(AppComponent appComponent) {
+
+        DaggerRecommendComponent.builder().appComponent(appComponent)
+                .recommendModule(new RecommendModule(this)).build().inject(this);
     }
 
     private void initRecyclerView(List<AppInfo> appInfos) {

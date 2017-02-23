@@ -11,6 +11,11 @@
     <string name="game_title">游戏</string>
     <string name="category_title">分类</string>
 
+    <string name="guide_1">全新改版</string>
+    <string name="guide_2">视频购物</string>
+    <string name="guide_3">评价晒图</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

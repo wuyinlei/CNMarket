@@ -1,5 +1,7 @@
 package ruolan.com.cnmarket.presenter;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -12,19 +14,18 @@ import ruolan.com.cnmarket.presenter.contract.RecommendContract;
  * Created by wuyinlei on 2017/2/22.
  */
 
-public class RecommendPresenter implements RecommendContract.Presenter {
+public class RecommendPresenter extends BasePresenter<RecommendModel,RecommendContract.View> {
 
-    private RecommendContract.View mView;
+//    private RecommendContract.View mView;
+//
+//    private RecommendModel mModel;
 
-    private RecommendModel mModel;
-
-    public RecommendPresenter(RecommendContract.View view, RecommendModel model) {
-        this.mView = view;
-
-        mModel = model;
+    @Inject
+    public RecommendPresenter(RecommendModel recommendModel, RecommendContract.View view) {
+        super(recommendModel, view);
     }
 
-    @Override
+
     public void requestDatas() {
         mView.showLoading();
         mModel.getApps(new Callback<PageBean<AppInfo>>() {

@@ -1,8 +1,16 @@
 package ruolan.com.cnmarket.presenter;
 
-/**
- * Created by wuyinlei on 2017/2/22.
- */
+import ruolan.com.cnmarket.ui.BaseView;
 
-public interface BasePresenter {
+
+public class BasePresenter<M, V extends BaseView> {
+
+    protected M mModel;
+
+    protected V mView;
+
+    public BasePresenter(M m, V v) {
+        this.mModel = m;
+        this.mView = v;
+    }
 }
