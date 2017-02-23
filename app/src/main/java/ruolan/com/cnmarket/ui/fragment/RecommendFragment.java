@@ -18,12 +18,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ruolan.com.cnmarket.Contants;
+import ruolan.com.cnmarket.CNMarketApplication;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.base.BaseFragment;
 import ruolan.com.cnmarket.been.AppInfo;
-import ruolan.com.cnmarket.di.DaggerRecommendComponent;
-import ruolan.com.cnmarket.di.RecommendModule;
+import ruolan.com.cnmarket.common.Constants;
+import ruolan.com.cnmarket.di.component.DaggerRecommendComponent;
+import ruolan.com.cnmarket.di.module.RecommendModule;
 import ruolan.com.cnmarket.presenter.contract.RecommendContract;
 import ruolan.com.cnmarket.ui.adapter.RecommendAppAdapter;
 
@@ -84,7 +85,10 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
     @Override
     public void init() {
         ButterKnife.bind(this, mRootView);
-        DaggerRecommendComponent.builder().recommendModule(new RecommendModule(this))
+        DaggerRecommendComponent.builder()
+                .appComponent(((CNMarketApplication) getActivity()
+                        .getApplication()).getAppComponent())
+                .recommendModule(new RecommendModule(this))
                 .build().inject(this);
 //        mPresenter = new RecommendPresenter(this);
 //        mProgressDialog = new ProgressDialog(getActivity());
@@ -118,7 +122,7 @@ public class RecommendFragment extends BaseFragment implements RecommendContract
 
     public static Fragment newInstance(String title) {
         Bundle bundle = new Bundle();
-        bundle.putString(Contants.FRAGMENT_TITLE, title);
+        bundle.putString(Constants.FRAGMENT_TITLE, title);
         RecommendFragment fragment = new RecommendFragment();
         fragment.setArguments(bundle);
         return fragment;

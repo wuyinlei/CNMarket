@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket.widget;
+package ruolan.com.cnmarket.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

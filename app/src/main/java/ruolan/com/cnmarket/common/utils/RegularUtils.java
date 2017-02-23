@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket.utils;
+package ruolan.com.cnmarket.common.utils;
 
 import java.util.regex.Pattern;
 

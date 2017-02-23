@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ruolan.com.cnmarket.R;
-import ruolan.com.cnmarket.ViewPagerAdapter;
+import ruolan.com.cnmarket.ui.adapter.ViewPagerAdapter;
 import ruolan.com.cnmarket.base.BaseActivity;
 import ruolan.com.cnmarket.ui.fragment.CategoryFragment;
 import ruolan.com.cnmarket.ui.fragment.GameFragment;

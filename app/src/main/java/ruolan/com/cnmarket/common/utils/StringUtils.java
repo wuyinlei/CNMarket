@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket.utils;
+package ruolan.com.cnmarket.common.utils;
 
 /**
  * Created by Administrator on 2016/10/25.

@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket;
+package ruolan.com.cnmarket.ui.adapter;
 
 
 import android.support.v4.app.Fragment;

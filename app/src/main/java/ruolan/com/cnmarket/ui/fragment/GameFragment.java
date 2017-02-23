@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
-import ruolan.com.cnmarket.Contants;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.base.BaseFragment;
+import ruolan.com.cnmarket.common.Constants;
 
 /**
  * Created by wuyinlei on 2017/1/19.
@@ -38,7 +38,7 @@ public class GameFragment extends BaseFragment {
 
     public static Fragment newInstance(String title) {
         Bundle bundle = new Bundle();
-        bundle.putString(Contants.FRAGMENT_TITLE, title);
+        bundle.putString(Constants.FRAGMENT_TITLE, title);
         ContentFragment fragment = new ContentFragment();
         fragment.setArguments(bundle);
         return fragment;

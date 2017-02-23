@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import ruolan.com.cnmarket.CNMarketApplicaption;
+import ruolan.com.cnmarket.CNMarketApplication;
 
 /**
  * Created by wuyinlei on 2017/1/9.
@@ -20,7 +20,7 @@ public abstract class BaseFragment extends Fragment {
 
     private Unbinder mUnbinder;
 
-    private CNMarketApplicaption mApplication;
+    private CNMarketApplication mApplication;
 
     public View mRootView;
 
@@ -47,7 +47,7 @@ public abstract class BaseFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
 
-        this.mApplication = (CNMarketApplicaption) getActivity().getApplication();
+        this.mApplication = (CNMarketApplication) getActivity().getApplication();
        // setupAcitivtyComponent(mApplication.getAppComponent());
 
 

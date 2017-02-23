@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket.di;
+package ruolan.com.cnmarket.di.module;
 
 import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import dagger.Module;
 import dagger.Provides;
 import ruolan.com.cnmarket.data.RecommendModel;
+import ruolan.com.cnmarket.data.http.ApiService;
 import ruolan.com.cnmarket.presenter.RecommendPresenter;
 import ruolan.com.cnmarket.presenter.contract.RecommendContract;
 
@@ -39,8 +40,8 @@ public class RecommendModule {
     }
 
     @Provides
-    public RecommendModel provideModel(){
-        return new RecommendModel();
+    public RecommendModel provideModel(ApiService apiService){
+        return new RecommendModel(apiService);
     }
 
 

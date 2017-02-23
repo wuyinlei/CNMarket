@@ -15,10 +15,6 @@ public interface RecommendContract {
     interface  View extends BaseView{
         void showResult(List<AppInfo> appInfos);
 
-        void showLoading();
-
-        void dismissLoading();
-
         void showNoData();
 
         void showError(String msg);
@@ -28,7 +24,7 @@ public interface RecommendContract {
 
 
 
-        public void requestDatas();
+        void requestDatas();
 
     }
 }

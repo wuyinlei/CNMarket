@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import ruolan.com.cnmarket.Contants;
 import ruolan.com.cnmarket.R;
+import ruolan.com.cnmarket.common.Constants;
 
 
 /**
@@ -28,7 +28,7 @@ public class ContentFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recomment, container, false);
         mTvTitle = (TextView) view.findViewById(R.id.title);
-        mTitle = getArguments().getString(Contants.FRAGMENT_TITLE);
+        mTitle = getArguments().getString(Constants.FRAGMENT_TITLE);
         if (!TextUtils.isEmpty(mTitle))
             mTvTitle.setText(mTitle);
         return view;
@@ -38,7 +38,7 @@ public class ContentFragment extends Fragment {
 
     public static Fragment newInstance(String title) {
         Bundle bundle = new Bundle();
-        bundle.putString(Contants.FRAGMENT_TITLE, title);
+        bundle.putString(Constants.FRAGMENT_TITLE, title);
         ContentFragment fragment = new ContentFragment();
         fragment.setArguments(bundle);
         return fragment;

@@ -1,4 +1,4 @@
-package ruolan.com.cnmarket.utils;
+package ruolan.com.cnmarket.common.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;
