@@ -31,12 +31,10 @@ public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendC
 //
 //    private RecommendModel mModel;
 
-    private RxErrorHandler mRxErrorHandler;
 
     @Inject
-    public RecommendPresenter(RecommendModel recommendModel, RecommendContract.View view, RxErrorHandler errorHandler) {
+    public RecommendPresenter(RecommendModel recommendModel, RecommendContract.View view) {
         super(recommendModel, view);
-        this.mRxErrorHandler = errorHandler;
     }
 
 
@@ -71,7 +69,7 @@ public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendC
 //                .subscribeOn(Schedulers.io())  //切换到子线程操作
 //                .observeOn(AndroidSchedulers.mainThread()) //请求结果切换到主线程进行操作
                 .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
-                .subscribe(new ProgressDialogSubscriber<PageBean<AppInfo>>(activity, mRxErrorHandler) {
+                .subscribe(new ProgressDialogSubscriber<PageBean<AppInfo>>(activity) {
                     @Override
                     public void onNext(PageBean<AppInfo> appInfoPageBean) {
                         if (appInfoPageBean != null) {

@@ -1,21 +1,22 @@
 package ruolan.com.cnmarket.common.rx.subscribe;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 
-import dagger.Component;
-import ruolan.com.cnmarket.common.rx.RxErrorHandler;
 
 
-public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber<T> {
+public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber<T>
+        implements ProgressDialogHandler.OnProgressCancelListener {
 
-    private ProgressDialog mProgressDialog;
+//    private ProgressDialog mProgressDialog;
+
+    private ProgressDialogHandler mProgressDialogHandler;
 
     private Context mContext;
 
-    public ProgressDialogSubscriber(Context context, RxErrorHandler rxErrorHandler) {
-        super(rxErrorHandler);
+    public ProgressDialogSubscriber(Context context) {
+        super(context);
         this.mContext = context;
+        mProgressDialogHandler = new ProgressDialogHandler(mContext,true,this);
     }
 
 
@@ -23,12 +24,14 @@ public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber
     public void onStart() {
         super.onStart();
         if (isShowDialog())
-            showProgressDialog();
+            this.mProgressDialogHandler.showProgressDialog();
     }
 
     @Override
     public void onCompleted() {
-        dismissProgressDialog();
+        if (isShowDialog()){
+            this.mProgressDialogHandler.dismissProgressDialog();
+        }
     }
 
     /**
@@ -43,21 +46,28 @@ public abstract class ProgressDialogSubscriber<T> extends ErrorHandlerSubscriber
     @Override
     public void onError(Throwable e) {
         super.onError(e);
-        dismissProgressDialog();
-    }
-
-    private void initProgressDialog() {
-        mProgressDialog = new ProgressDialog(mContext);
-        mProgressDialog.setMessage("loading....");
-    }
-
-    private void showProgressDialog() {
-        mProgressDialog.show();
-    }
-
-    private void dismissProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
+        if (isShowDialog()){
+            this.mProgressDialogHandler.dismissProgressDialog();
         }
+    }
+
+//    private void initProgressDialog() {
+//        mProgressDialog = new ProgressDialog(mContext);
+//        mProgressDialog.setMessage("loading....");
+//    }
+
+//    private void showProgressDialog() {
+//        mProgressDialogHandler.showProgressDialog();
+//    }
+//
+//    private void dismissProgressDialog() {
+//        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+//            mProgressDialog.dismiss();
+//        }
+//    }
+
+    @Override
+    public void onCancelProgress() {
+        unsubscribe();
     }
 }
