@@ -1,6 +1,8 @@
 package ruolan.com.cnmarket.di.module;
 
 
+import android.app.Application;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -12,6 +14,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ruolan.com.cnmarket.CNMarketApplication;
+import ruolan.com.cnmarket.common.rx.RxErrorHandler;
 import ruolan.com.cnmarket.data.http.ApiService;
 
 @Module
@@ -58,5 +62,11 @@ public class HttpModule {
     @Singleton
     public ApiService provideApiService(Retrofit retrofit){
         return retrofit.create(ApiService.class);
+    }
+
+    @Provides
+    @Singleton
+    public RxErrorHandler provideErrorHandler(CNMarketApplication application){
+        return new RxErrorHandler(application);
     }
 }
