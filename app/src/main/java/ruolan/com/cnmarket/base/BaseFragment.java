@@ -14,9 +14,10 @@ import butterknife.Unbinder;
 import ruolan.com.cnmarket.CNMarketApplication;
 import ruolan.com.cnmarket.di.component.AppComponent;
 import ruolan.com.cnmarket.presenter.BasePresenter;
+import ruolan.com.cnmarket.ui.BaseView;
 
 
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
 
     private Unbinder mUnbinder;
@@ -51,9 +52,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
-
-
     }
 
     @Override
@@ -73,4 +71,20 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment {
 
 
     public abstract void init();
+
+
+    @Override
+    public void showError(String msg) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void dismissLoading() {
+
+    }
 }

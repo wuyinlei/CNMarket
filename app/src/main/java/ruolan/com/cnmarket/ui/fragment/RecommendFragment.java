@@ -20,7 +20,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ruolan.com.cnmarket.R;
-import ruolan.com.cnmarket.base.BaseFragment;
 import ruolan.com.cnmarket.been.AppInfo;
 import ruolan.com.cnmarket.common.Constants;
 import ruolan.com.cnmarket.di.component.AppComponent;
@@ -31,7 +30,7 @@ import ruolan.com.cnmarket.presenter.contract.RecommendContract;
 import ruolan.com.cnmarket.ui.adapter.RecommendAppAdapter;
 
 
-public class RecommendFragment extends BaseFragment<RecommendPresenter> implements
+public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements
         RecommendContract.View {
 
     private String mTitle;
@@ -49,6 +48,9 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
 
     @Inject
     ProgressDialog mProgressDialog;
+
+
+
 
 
     @Override
@@ -154,6 +156,12 @@ public class RecommendFragment extends BaseFragment<RecommendPresenter> implemen
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void onEmptyViewClick() {
+        super.onEmptyViewClick();
+        mPresenter.requestDatas();
     }
 
     @Override

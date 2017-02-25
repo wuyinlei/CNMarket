@@ -1,7 +1,11 @@
 package ruolan.com.cnmarket.presenter;
 
+import android.Manifest;
 import android.app.Activity;
+import android.graphics.pdf.PdfDocument;
 import android.support.v4.app.Fragment;
+
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import javax.inject.Inject;
 
@@ -15,11 +19,14 @@ import ruolan.com.cnmarket.common.rx.RxErrorHandler;
 import ruolan.com.cnmarket.common.rx.RxHttpResponseCompat;
 import ruolan.com.cnmarket.common.rx.subscribe.ErrorHandlerSubscriber;
 import ruolan.com.cnmarket.common.rx.subscribe.ProgressDialogSubscriber;
+import ruolan.com.cnmarket.common.rx.subscribe.ProgressSubscriber;
 import ruolan.com.cnmarket.data.RecommendModel;
 import ruolan.com.cnmarket.presenter.contract.RecommendContract;
+import rx.Observable;
 import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.observers.SafeSubscriber;
 import rx.observers.Subscribers;
 import rx.schedulers.Schedulers;
@@ -65,24 +72,45 @@ public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendC
 //                mView.showError(t.getMessage());
 //            }
 //        });
-        mModel.getApps()
-//                .subscribeOn(Schedulers.io())  //切换到子线程操作
-//                .observeOn(AndroidSchedulers.mainThread()) //请求结果切换到主线程进行操作
-                .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
-                .subscribe(new ProgressDialogSubscriber<PageBean<AppInfo>>(activity) {
-                    @Override
-                    public void onNext(PageBean<AppInfo> appInfoPageBean) {
-                        if (appInfoPageBean != null) {
-                            mView.showResult(appInfoPageBean.getDatas());
-                        } else {
-                            mView.showNoData();
-                        }
-                    }
+
+        RxPermissions rxPermissions = new RxPermissions(activity);
+
+        rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
+                .flatMap(new Func1<Boolean, Observable<PageBean<AppInfo>>>() {
 
                     @Override
-                    protected boolean isShowDialog() {
-                        return super.isShowDialog();
+                    public Observable<PageBean<AppInfo>> call(Boolean aBoolean) {
+                        if (aBoolean) {
+                            return mModel.getApps().compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult());
+                        } else {
+                            return Observable.empty();
+                        }
                     }
-                });
+                }).subscribe(new ProgressSubscriber<PageBean<AppInfo>>(activity,mView) {
+            @Override
+            public void onNext(PageBean<AppInfo> appInfoPageBean) {
+
+            }
+        });
+
+//        mModel.getApps()
+////                .subscribeOn(Schedulers.io())  //切换到子线程操作
+////                .observeOn(AndroidSchedulers.mainThread()) //请求结果切换到主线程进行操作
+//                .compose(RxHttpResponseCompat.<PageBean<AppInfo>>compatResult())
+//                .subscribe(new ProgressDialogSubscriber<PageBean<AppInfo>>(activity) {
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> appInfoPageBean) {
+//                        if (appInfoPageBean != null) {
+//                            mView.showResult(appInfoPageBean.getDatas());
+//                        } else {
+//                            mView.showNoData();
+//                        }
+//                    }
+//
+//                    @Override
+//                    protected boolean isShowDialog() {
+//                        return super.isShowDialog();
+//                    }
+//                });
     }
 }
