@@ -86,10 +86,20 @@ public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendC
                             return Observable.empty();
                         }
                     }
-                }).subscribe(new ProgressSubscriber<PageBean<AppInfo>>(activity,mView) {
+                }).subscribe(new ProgressSubscriber<PageBean<AppInfo>>(activity, mView) {
+
+            @Override
+            protected boolean isShowDialog() {
+                return super.isShowDialog();
+            }
+
             @Override
             public void onNext(PageBean<AppInfo> appInfoPageBean) {
-
+                if (appInfoPageBean != null) {
+                    mView.showResult(appInfoPageBean.getDatas());
+                } else {
+                    mView.showNoData();
+                }
             }
         });
 

@@ -46,8 +46,8 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
    // @Inject
 //    RecommendContract.Presenter mPresenter;
 
-    @Inject
-    ProgressDialog mProgressDialog;
+//    @Inject
+//    ProgressDialog mProgressDialog;
 
 
 
@@ -146,17 +146,17 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         initRecyclerView(appInfos);
     }
 
-    @Override
-    public void showLoading() {
-        mProgressDialog.show();
-    }
-
-    @Override
-    public void dismissLoading() {
-        if (mProgressDialog != null) {
-            mProgressDialog.dismiss();
-        }
-    }
+//    @Override
+//    public void showLoading() {
+//       // mProgressDialog.show();
+//    }
+//
+//    @Override
+//    public void dismissLoading() {
+////        if (mProgressDialog != null) {
+////            mProgressDialog.dismiss();
+////        }
+//    }
 
     @Override
     public void onEmptyViewClick() {

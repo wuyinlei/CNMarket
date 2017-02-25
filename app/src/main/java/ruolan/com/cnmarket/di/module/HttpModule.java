@@ -3,6 +3,8 @@ package ruolan.com.cnmarket.di.module;
 
 import android.app.Application;
 
+import com.google.gson.Gson;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -15,6 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ruolan.com.cnmarket.CNMarketApplication;
+import ruolan.com.cnmarket.common.http.CommonParamsInterceptor;
 import ruolan.com.cnmarket.common.rx.RxErrorHandler;
 import ruolan.com.cnmarket.data.http.ApiService;
 
@@ -24,7 +27,7 @@ public class HttpModule {
 
     @Provides
     @Singleton
-    public OkHttpClient provideOkHttpClient() {
+    public OkHttpClient provideOkHttpClient(CNMarketApplication application, Gson gson) {
 
         //log用拦截器
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -39,7 +42,7 @@ public class HttpModule {
                 //HeadInterceptor 实现了Intercepter  用来网Request  Header添加一些相关数据  如APP版本 token信息
 //                .addInterceptor(new HttpLoggingInterceptor())
 
-                .addInterceptor(loggingInterceptor)
+                .addInterceptor(new CommonParamsInterceptor(gson,application))
                 .connectTimeout(10, TimeUnit.SECONDS)//链接超时
                 .readTimeout(10, TimeUnit.SECONDS)//设置读取超时
                 .build();

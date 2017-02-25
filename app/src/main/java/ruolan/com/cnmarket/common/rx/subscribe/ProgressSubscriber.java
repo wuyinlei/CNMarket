@@ -30,7 +30,7 @@ public abstract class ProgressSubscriber<T> extends ErrorHandlerSubscriber<T>
 
     @Override
     public void onStart() {
-        super.onStart();
+       // super.onStart();
         if (isShowDialog())
            this.mBaseView.showLoading();
     }
