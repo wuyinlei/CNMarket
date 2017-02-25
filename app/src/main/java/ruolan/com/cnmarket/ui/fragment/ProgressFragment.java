@@ -22,6 +22,7 @@ import ruolan.com.cnmarket.ui.BaseView;
 
 public abstract class ProgressFragment<T extends BasePresenter> extends Fragment implements BaseView{
 
+    //根布局
     public FrameLayout mRootView;
 
 

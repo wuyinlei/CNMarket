@@ -2,34 +2,20 @@ package ruolan.com.cnmarket.presenter;
 
 import android.Manifest;
 import android.app.Activity;
-import android.graphics.pdf.PdfDocument;
 import android.support.v4.app.Fragment;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import javax.inject.Inject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import ruolan.com.cnmarket.been.AppInfo;
-import ruolan.com.cnmarket.been.BaseBean;
 import ruolan.com.cnmarket.been.PageBean;
-import ruolan.com.cnmarket.common.rx.RxErrorHandler;
 import ruolan.com.cnmarket.common.rx.RxHttpResponseCompat;
-import ruolan.com.cnmarket.common.rx.subscribe.ErrorHandlerSubscriber;
-import ruolan.com.cnmarket.common.rx.subscribe.ProgressDialogSubscriber;
 import ruolan.com.cnmarket.common.rx.subscribe.ProgressSubscriber;
 import ruolan.com.cnmarket.data.RecommendModel;
 import ruolan.com.cnmarket.presenter.contract.RecommendContract;
 import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
-import rx.observers.SafeSubscriber;
-import rx.observers.Subscribers;
-import rx.schedulers.Schedulers;
 
 
 public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendContract.View> {
@@ -47,7 +33,7 @@ public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendC
 
     public void requestDatas() {
 
-        Activity activity = null;
+        Activity activity;
 
         if (mView instanceof Fragment) {
             activity = ((Fragment) mView).getActivity();
@@ -76,6 +62,7 @@ public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendC
         RxPermissions rxPermissions = new RxPermissions(activity);
 
         rxPermissions.request(Manifest.permission.READ_PHONE_STATE)
+                //flatMap转换器
                 .flatMap(new Func1<Boolean, Observable<PageBean<AppInfo>>>() {
 
                     @Override
