@@ -119,7 +119,8 @@ public class IndexMutiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
 
-            AppInfoAdapter appInfoAdapter = new AppInfoAdapter();
+            AppInfoAdapter appInfoAdapter =  AppInfoAdapter.builder().showPosition(false)
+                    .showBrief(true).showCategoryName(false).build();
 
 
             if(viewHolder.type==TYPE_APPS){

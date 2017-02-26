@@ -22,12 +22,12 @@ import ruolan.com.cnmarket.di.component.AppComponent;
 import ruolan.com.cnmarket.di.component.DaggerRecommendComponent;
 import ruolan.com.cnmarket.di.module.RecommendModule;
 import ruolan.com.cnmarket.presenter.RecommendPresenter;
-import ruolan.com.cnmarket.presenter.contract.RecommendContract;
+import ruolan.com.cnmarket.presenter.contract.AppInfoContract;
 import ruolan.com.cnmarket.ui.adapter.IndexMutiAdapter;
 
 
 public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements
-        RecommendContract.View {
+        AppInfoContract.View {
 
     private String mTitle;
     private TextView mTvTitle;
@@ -42,7 +42,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
 
    // @Inject
-//    RecommendContract.Presenter mPresenter;
+//    AppInfoContract.Presenter mPresenter;
 
 //    @Inject
 //    ProgressDialog mProgressDialog;
@@ -82,12 +82,12 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public int setLayout() {
-        return R.layout.fragment_recommend;
+        return R.layout.template_recycler_view;
     }
 
     @Override
     public void init() {
-        ButterKnife.bind(this, mRootView);
+       // ButterKnife.bind(this, mRootView);
 //        DaggerRecommendComponent.builder()
 //                .appComponent(((CNMarketApplication) getActivity()
 //                        .getApplication()).getAppComponent())
@@ -161,6 +161,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     @Override
     public void onEmptyViewClick() {
         super.onEmptyViewClick();
+        //重新请求数据
         mPresenter.requestDatas();
     }
 

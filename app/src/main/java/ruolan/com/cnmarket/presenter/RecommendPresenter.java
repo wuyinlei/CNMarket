@@ -1,33 +1,26 @@
 package ruolan.com.cnmarket.presenter;
 
-import android.Manifest;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 
-import com.tbruyelle.rxpermissions.RxPermissions;
-
 import javax.inject.Inject;
 
-import ruolan.com.cnmarket.been.AppInfo;
 import ruolan.com.cnmarket.been.IndexBean;
-import ruolan.com.cnmarket.been.PageBean;
 import ruolan.com.cnmarket.common.rx.RxHttpResponseCompat;
 import ruolan.com.cnmarket.common.rx.subscribe.ProgressSubscriber;
-import ruolan.com.cnmarket.data.RecommendModel;
-import ruolan.com.cnmarket.presenter.contract.RecommendContract;
-import rx.Observable;
-import rx.functions.Func1;
+import ruolan.com.cnmarket.data.AppInfoModel;
+import ruolan.com.cnmarket.presenter.contract.AppInfoContract;
 
 
-public class RecommendPresenter extends BasePresenter<RecommendModel, RecommendContract.View> {
+public class RecommendPresenter extends BasePresenter<AppInfoModel, AppInfoContract.View> {
 
-//    private RecommendContract.View mView;
+//    private AppInfoContract.View mView;
 //
-//    private RecommendModel mModel;
+//    private AppInfoModel mModel;
 
 
     @Inject
-    public RecommendPresenter(RecommendModel recommendModel, RecommendContract.View view) {
+    public RecommendPresenter(AppInfoModel recommendModel, AppInfoContract.View view) {
         super(recommendModel, view);
     }
 

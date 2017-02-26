@@ -9,16 +9,13 @@ import ruolan.com.cnmarket.data.AppInfoModel;
 import ruolan.com.cnmarket.data.http.ApiService;
 import ruolan.com.cnmarket.presenter.contract.AppInfoContract;
 
-/**
- * Created by wuyinlei on 2017/2/22.
- */
 
 @Module
-public class RecommendModule {
+public class RankingModule {
 
-    public AppInfoContract.View mView;
+    public AppInfoContract.RankingView mView;
 
-    public RecommendModule(AppInfoContract.View view) {
+    public RankingModule(AppInfoContract.RankingView view) {
         mView = view;
     }
 
@@ -28,7 +25,7 @@ public class RecommendModule {
 //    }
 
     @Provides
-    public AppInfoContract.View provideView(){
+    public AppInfoContract.RankingView provideView(){
         return mView;
     }
 

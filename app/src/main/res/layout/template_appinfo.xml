@@ -20,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
-        android:textSize="18dp"
-        android:visibility="gone"
+        android:textSize="22dp"
         style="@style/Text_Title"
         android:text="1."/>
 
