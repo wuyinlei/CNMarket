@@ -33,6 +33,12 @@ public class CommonParamsInterceptor implements Interceptor {
     private Gson mGson;
     private Context mContext;
 
+    /**
+     * 构造函数
+     *
+     * @param gson    gson对象  因为我们需要用到字符串转json和json转字符串
+     * @param context 需要获取到一些设备信息  用到上下文
+     */
     public CommonParamsInterceptor(Gson gson, Context context) {
         mGson = gson;
         this.mContext = context;
@@ -41,16 +47,17 @@ public class CommonParamsInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
 
-
+        //获取到request
         Request request = chain.request();
 
+        //获取到方法
         String method = request.method();
 
         //公共参数hasmap
 
         try {
 
-
+            //添加公共参数
             HashMap<String, Object> commomParamsMap = new HashMap<>();
 
             commomParamsMap.put(Constants.IMEI, DeviceUtils.getIMEI(mContext));
@@ -62,16 +69,18 @@ public class CommonParamsInterceptor implements Interceptor {
             commomParamsMap.put(Constants.DENSITY_SCALE_FACTOR, mContext.getResources().getDisplayMetrics().density + "");
 
 
+            //get请求的封装
             if (method.equals("GET")) {
-
+                //获取到请求地址api
                 HttpUrl httpUrlurl = request.url();
-                HashMap<String, Object> rootMap = new HashMap<>();
 
+                HashMap<String, Object> rootMap = new HashMap<>();
+                //通过请求地址(最初始的请求地址)获取到参数列表
                 Set<String> parameterNames = httpUrlurl.queryParameterNames();
-                for (String key : parameterNames) {
-                    if (Constants.PARM.equals(key)) {
+                for (String key : parameterNames) {  //循环参数列表
+                    if (Constants.PARM.equals(key)) {  //判断是否有匹配的字段  这个类似于  /xxx/xxx?p={}  匹配这个p
                         String oldParamsJson = httpUrlurl.queryParameter(Constants.PARM);
-                        if (oldParamsJson != null) {
+                        if (oldParamsJson != null) {  //因为有的是没有这个p={"page"：0}  而是直接/xxx/index的
                             HashMap<String, Object> p = mGson.fromJson(oldParamsJson, HashMap.class);  //原始参数
                             if (p != null) {
                                 for (Map.Entry<String, Object> entry : p.entrySet()) {
@@ -90,6 +99,7 @@ public class CommonParamsInterceptor implements Interceptor {
 //
 //            }
 
+                //把原来请求的和公共的参数进行组装
                 rootMap.put("publicParams", commomParamsMap);  //重新组装
 
                 String newJsonParams = mGson.toJson(rootMap);  //装换成json字符串
@@ -104,6 +114,7 @@ public class CommonParamsInterceptor implements Interceptor {
                 request = request.newBuilder().url(url).build();  //重新构建请求
 
 
+                //post请求的封装
             } else if (method.equals("POST")) {
 
 //           FormBody.Builder builder = new FormBody.Builder();
@@ -116,6 +127,7 @@ public class CommonParamsInterceptor implements Interceptor {
                         rootMap.put(((FormBody) requestBody).encodedName(i), ((FormBody) requestBody).encodedValue(i));
                     }
                 } else {
+                    //buffer流
                     Buffer buffer = new Buffer();
                     requestBody.writeTo(buffer);
                     String oldParamsJson = buffer.readUtf8();
@@ -131,7 +143,7 @@ public class CommonParamsInterceptor implements Interceptor {
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
-
+        //最后通过chain.proceed(request)进行返回
         return chain.proceed(request);
     }
 }

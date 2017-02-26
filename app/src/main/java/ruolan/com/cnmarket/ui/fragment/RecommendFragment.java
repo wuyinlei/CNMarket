@@ -1,11 +1,9 @@
 package ruolan.com.cnmarket.ui.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,20 +12,18 @@ import android.widget.Toast;
 
 import java.util.List;
 
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.been.AppInfo;
+import ruolan.com.cnmarket.been.IndexBean;
 import ruolan.com.cnmarket.common.Constants;
 import ruolan.com.cnmarket.di.component.AppComponent;
 import ruolan.com.cnmarket.di.component.DaggerRecommendComponent;
 import ruolan.com.cnmarket.di.module.RecommendModule;
 import ruolan.com.cnmarket.presenter.RecommendPresenter;
 import ruolan.com.cnmarket.presenter.contract.RecommendContract;
-import ruolan.com.cnmarket.ui.adapter.RecommendAppAdapter;
+import ruolan.com.cnmarket.ui.adapter.IndexMutiAdapter;
 
 
 public class RecommendFragment extends ProgressFragment<RecommendPresenter> implements
@@ -40,7 +36,9 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     public RecyclerView mRecyclerView;
 
     private List<AppInfo> mAppInfos;
-    private RecommendAppAdapter mAppAdapter;
+//    private RecommendAppAdapter mAppAdapter;
+
+    private IndexMutiAdapter mAppAdapter;
 
 
    // @Inject
@@ -57,6 +55,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     protected void initData() {
 
         Log.d("RecommendFragment", "mPresenter:" + mPresenter);
+        initRecyclerView();
 
         mPresenter.requestDatas();
 
@@ -122,17 +121,21 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
                 .recommendModule(new RecommendModule(this)).build().inject(this);
     }
 
-    private void initRecyclerView(List<AppInfo> appInfos) {
+    private void initRecyclerView() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 //        mRecyclerView.addItemDecoration();
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mAppAdapter = new RecommendAppAdapter(getActivity(), appInfos);
-        mRecyclerView.setAdapter(mAppAdapter);
+
 
     }
 
 
+    /**
+     * 实例方法
+     * @param title  标题
+     * @return
+     */
     public static Fragment newInstance(String title) {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.FRAGMENT_TITLE, title);
@@ -141,10 +144,7 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
         return fragment;
     }
 
-    @Override
-    public void showResult(List<AppInfo> appInfos) {
-        initRecyclerView(appInfos);
-    }
+
 
 //    @Override
 //    public void showLoading() {
@@ -162,6 +162,13 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
     public void onEmptyViewClick() {
         super.onEmptyViewClick();
         mPresenter.requestDatas();
+    }
+
+    @Override
+    public void showResult(IndexBean appInfos) {
+        mAppAdapter = new IndexMutiAdapter(getActivity());
+        mAppAdapter.setIndexBean(appInfos);
+        mRecyclerView.setAdapter(mAppAdapter);
     }
 
     @Override

@@ -24,4 +24,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+
+    <style name="Text_Title">
+
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/md_black_1000</item>
+
+
+    </style>
+
+    <style name="Text_Content">
+
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/md_grey_400</item>
+    </style>
+
 </resources>

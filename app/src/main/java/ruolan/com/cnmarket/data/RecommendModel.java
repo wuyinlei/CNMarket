@@ -3,6 +3,7 @@ package ruolan.com.cnmarket.data;
 import retrofit2.Callback;
 import ruolan.com.cnmarket.been.AppInfo;
 import ruolan.com.cnmarket.been.BaseBean;
+import ruolan.com.cnmarket.been.IndexBean;
 import ruolan.com.cnmarket.been.PageBean;
 import ruolan.com.cnmarket.data.http.ApiService;
 import rx.Observable;
@@ -26,5 +27,9 @@ public class RecommendModel {
 //        mApiService.getApps("{'page':0}").enqueue(callback);
 
         return  mApiService.getApps("{'page':0}");
+    }
+
+    public Observable<BaseBean<IndexBean>> getIndex(){
+        return mApiService.index();
     }
 }

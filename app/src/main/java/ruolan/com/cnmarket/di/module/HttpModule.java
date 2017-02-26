@@ -41,7 +41,7 @@ public class HttpModule {
         return new OkHttpClient.Builder()
                 //HeadInterceptor 实现了Intercepter  用来网Request  Header添加一些相关数据  如APP版本 token信息
 //                .addInterceptor(new HttpLoggingInterceptor())
-
+                //添加自定义的拦截器，完成公共参数的封装
                 .addInterceptor(new CommonParamsInterceptor(gson,application))
                 .connectTimeout(10, TimeUnit.SECONDS)//链接超时
                 .readTimeout(10, TimeUnit.SECONDS)//设置读取超时

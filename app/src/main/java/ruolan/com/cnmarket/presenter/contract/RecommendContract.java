@@ -3,6 +3,7 @@ package ruolan.com.cnmarket.presenter.contract;
 import java.util.List;
 
 import ruolan.com.cnmarket.been.AppInfo;
+import ruolan.com.cnmarket.been.IndexBean;
 import ruolan.com.cnmarket.presenter.BasePresenter;
 import ruolan.com.cnmarket.ui.BaseView;
 
@@ -13,7 +14,7 @@ import ruolan.com.cnmarket.ui.BaseView;
 public interface RecommendContract {
 
     interface View extends BaseView {
-        void showResult(List<AppInfo> appInfos);
+        void showResult(IndexBean appInfos);
 
         void showNoData();
 
