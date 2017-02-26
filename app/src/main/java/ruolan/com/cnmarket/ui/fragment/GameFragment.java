@@ -8,45 +8,40 @@ import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.base.BaseFragment;
 import ruolan.com.cnmarket.common.Constants;
 import ruolan.com.cnmarket.di.component.AppComponent;
+import ruolan.com.cnmarket.di.component.DaggerAppInfoComponent;
+import ruolan.com.cnmarket.di.module.AppInfoModule;
+import ruolan.com.cnmarket.presenter.AppInfoPresenter;
+import ruolan.com.cnmarket.ui.adapter.AppInfoAdapter;
 
-/**
- * Created by wuyinlei on 2017/1/19.
- */
 
-public class GameFragment extends BaseFragment {
-    private String mTitle;
-    private TextView mTvTitle;
+public class GameFragment extends BaseAppInfoFragment {
 
 
     @Override
-    protected void initData() {
-
+    public int type() {
+        return AppInfoPresenter.GAME;
     }
 
     @Override
     protected void setupAcitivtyComponent(AppComponent appComponent) {
-
+        DaggerAppInfoComponent.builder().appComponent(appComponent)
+                .appInfoModule(new AppInfoModule(this)).build().injectGameFragment(this);
     }
 
-    @Override
-    public int setLayout() {
-        return R.layout.fragment_game;
-    }
-
-    @Override
-    public void init() {
-//        mTvTitle = (TextView) mRootView.findViewById(R.id.title);
-//        mTitle = getArguments().getString(Contants.FRAGMENT_TITLE);
-//        if (!TextUtils.isEmpty(mTitle))
-//            mTvTitle.setText(mTitle);
-    }
 
 
     public static Fragment newInstance(String title) {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.FRAGMENT_TITLE, title);
-        ContentFragment fragment = new ContentFragment();
+        GameFragment fragment = new GameFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
+
+    @Override
+    public AppInfoAdapter builderAdapter() {
+        return AppInfoAdapter.builder().showPosition(false)
+                .showBrief(true).showCategoryName(false).build();
+    }
+
 }

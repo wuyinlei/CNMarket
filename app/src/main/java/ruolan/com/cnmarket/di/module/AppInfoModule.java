@@ -8,14 +8,15 @@ import dagger.Provides;
 import ruolan.com.cnmarket.data.AppInfoModel;
 import ruolan.com.cnmarket.data.http.ApiService;
 import ruolan.com.cnmarket.presenter.contract.AppInfoContract;
+import ruolan.com.cnmarket.ui.adapter.AppInfoAdapter;
 
 
 @Module
-public class RankingModule {
+public class AppInfoModule {
 
-    public AppInfoContract.RankingView mView;
+    public AppInfoContract.AppInfoView mView;
 
-    public RankingModule(AppInfoContract.RankingView view) {
+    public AppInfoModule(AppInfoContract.AppInfoView view) {
         mView = view;
     }
 
@@ -25,7 +26,7 @@ public class RankingModule {
 //    }
 
     @Provides
-    public AppInfoContract.RankingView provideView(){
+    public AppInfoContract.AppInfoView provideView(){
         return mView;
     }
 
@@ -40,6 +41,11 @@ public class RankingModule {
         return new AppInfoModel(apiService);
     }
 
+//
+//    @Provides
+//    public AppInfoAdapter provideAdapter(){
+//
+//    }
 
 
 //

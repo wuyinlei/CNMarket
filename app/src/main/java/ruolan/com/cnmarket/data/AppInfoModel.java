@@ -47,4 +47,13 @@ public class AppInfoModel {
     public Observable<BaseBean<PageBean<AppInfo>>> topList(int page){
         return mApiService.topList(page);
     }
+
+    /**
+     * 获取游戏数据
+     * @param page  页数
+     * @return
+     */
+    public Observable<BaseBean<PageBean<AppInfo>>> games(int page){
+        return mApiService.games(page);
+    }
 }
