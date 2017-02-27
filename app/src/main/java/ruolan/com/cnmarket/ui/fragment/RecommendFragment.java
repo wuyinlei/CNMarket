@@ -13,7 +13,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import ruolan.com.cnmarket.R;
 import ruolan.com.cnmarket.been.AppInfo;
 import ruolan.com.cnmarket.been.IndexBean;
@@ -174,11 +173,15 @@ public class RecommendFragment extends ProgressFragment<RecommendPresenter> impl
 
     @Override
     public void showNoData() {
+        //showError("没有数据进行展示");
+        showEmptyView("没有数据进行展示");
         Toast.makeText(getActivity(), "没有数据进行展示", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError(String msg) {
+       // showError(msg);
+        showEmptyView(msg);
         Toast.makeText(getActivity(), "服务器开小差了" + msg, Toast.LENGTH_SHORT).show();
     }
 }

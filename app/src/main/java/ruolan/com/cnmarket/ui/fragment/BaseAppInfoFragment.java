@@ -99,11 +99,13 @@ public abstract class BaseAppInfoFragment extends ProgressFragment<AppInfoPresen
 
     @Override
     public void showNoData() {
+        showEmptyView("没有数据进行展示");
         Toast.makeText(getActivity(), "没有数据进行展示", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError(String msg) {
+        showEmptyView(msg);
         Toast.makeText(getActivity(), "服务器开小差了" + msg, Toast.LENGTH_SHORT).show();
     }
 

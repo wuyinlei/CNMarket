@@ -14,9 +14,6 @@ import ruolan.com.cnmarket.common.exception.ApiException;
 import ruolan.com.cnmarket.common.exception.BaseException;
 import ruolan.com.cnmarket.common.exception.ErrorMessageFactory;
 
-/**
- * Created by wuyinlei on 2017/2/23.
- */
 
 public class RxErrorHandler {
 

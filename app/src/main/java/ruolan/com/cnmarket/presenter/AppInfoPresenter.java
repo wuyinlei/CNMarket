@@ -11,7 +11,10 @@ import ruolan.com.cnmarket.common.rx.subscribe.ProgressSubscriber;
 import ruolan.com.cnmarket.data.AppInfoModel;
 import ruolan.com.cnmarket.presenter.contract.AppInfoContract;
 import rx.Observable;
+import rx.Scheduler;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * 排行版 Presenter
