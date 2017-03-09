@@ -64,9 +64,11 @@ public class CommonParamsInterceptor implements Interceptor {
             commomParamsMap.put(Constants.MODEL, DeviceUtils.getModel());
             commomParamsMap.put(Constants.LANGUAGE, DeviceUtils.getLanguage());
             commomParamsMap.put(Constants.os, DeviceUtils.getBuildVersionIncremental());
-            commomParamsMap.put(Constants.RESOLUTION, DensityUtil.getScreenW(mContext) + "*" + DensityUtil.getScreenH(mContext));
+            commomParamsMap.put(Constants.RESOLUTION, DensityUtil.getScreenW(mContext) + "*"
+                    + DensityUtil.getScreenH(mContext));
             commomParamsMap.put(Constants.SDK, DeviceUtils.getBuildVersionSDK() + "");
-            commomParamsMap.put(Constants.DENSITY_SCALE_FACTOR, mContext.getResources().getDisplayMetrics().density + "");
+            commomParamsMap.put(Constants.DENSITY_SCALE_FACTOR, mContext.getResources()
+                    .getDisplayMetrics().density + "");
 
 
             //get请求的封装

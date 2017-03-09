@@ -30,6 +30,7 @@ public class RxHttpResponseCompat {
                                 @Override
                                 public void call(Subscriber<? super T> subscriber) {
                                     try {
+
                                         subscriber.onNext(tBaseBean.getData());
                                         subscriber.onCompleted();
                                     } catch (Exception e

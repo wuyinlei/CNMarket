@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.ViewTarget;
 * ImageLoadConfig
  */
 
+@SuppressWarnings("ALL")
 public class ImageLoadConfig {
 
     public static final int CENTER_CROP = 0;
